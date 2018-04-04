@@ -16,9 +16,13 @@
 
         </ul>
 
-        <input id="inpt" type="text">
+        <input id="inpt" type="text" v-model="newName">
 
-        <button id="btn" type="submit">Add Name</button>
+        <button v-on:click="addName" type="submit" v-bind:title="title">Add Name</button>
+        <!-- 
+            other way to use vue method [@click => v-on:click] & [v-method:title => :title (only if @ is used)]
+            <button @click="addName" type="submit" :title="title">Add Name</button> 
+        -->
 
     </div>
 
@@ -32,20 +36,28 @@
 
             data: { // ce que contient data
 
+                newName: '',
+
                 names: ["Ilias", "kevin", "Thomas", "Nicolas"],
 
-            } 
+                title: "This button add new value in the list."
+
+            },
+
+            methods: {
+
+                addName() {
+
+                    this.names.push(this.newName);
+
+                    this.newName = '';
+
+                }
+
+            }
 
         });
 
-        document.getElementById('btn').addEventListener('click', () => {
-
-            let name = document.getElementById('inpt').value;
-
-            app.names.push(name.value);
-
-            name.value = '';
-        });
     </script>
     
 </body>

@@ -5,10 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vue Js</title>
+
+    <style>
+        .red { color: red; }
+        .green { color: green; }
+        .blue { color: blue; }
+
+        .is-loading { background-color: yellow; }
+    </style>
 </head>
 <body>
 
     <div id="root">
+
+        <h1 :class="color">Title</h1>
 
         <ul>
 
@@ -24,6 +34,7 @@
             <button @click="addName" type="submit" :title="title">Add Name</button> 
         -->
 
+        <button :class="{ 'is-loading': isLoading }" @click="toggleClass">Toggle Me</button>
     </div>
 
     <script src="https://unpkg.com/vue@2.5.15/dist/vue.js"></script>
@@ -40,7 +51,11 @@
 
                 names: ["Ilias", "kevin", "Thomas", "Nicolas"],
 
-                title: "This button add new value in the list."
+                title: "This button add new value in the list.",
+
+                color: 'red',
+
+                isLoading: false
 
             },
 
@@ -51,6 +66,12 @@
                     this.names.push(this.newName);
 
                     this.newName = '';
+
+                },
+
+                toggleClass() {
+
+                    this.isLoading = true;
 
                 }
 

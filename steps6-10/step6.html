@@ -16,11 +16,21 @@
 
     <div id="root">
 
-        <h1>All my tasks:</h1>
+        <h2>Completed Tasks:</h2>
 
         <ul>
             
-            <li v-for="task in tasks" v-if="task.completed" v-text="task.description"></li>
+            <li v-for="task in Tasks" v-if="task.completed" v-text="task.description"></li>
+
+            <!-- v-text affichera uniquement ce qui correspond à la condition du v-if -->
+            
+        </ul>
+
+        <h2>Incomplete Tasks:</h2>
+
+        <ul>
+            
+            <li v-for="task in incompleteTasks" v-text="task.description"></li>
 
             <!-- v-text affichera uniquement ce qui correspond à la condition du v-if -->
             
@@ -38,7 +48,7 @@
     
                 data: { 
 
-                    tasks: [
+                    Tasks: [
 
                         { description: 'Gor to the store', completed: true },
 
@@ -57,6 +67,12 @@
                 },
 
                 computed: {
+
+                    incompleteTasks() {
+
+                        return this.Tasks.filter(task => ! task.completed);
+
+                    }
 
                 }
     
